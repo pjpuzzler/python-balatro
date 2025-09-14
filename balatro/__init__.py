@@ -2365,6 +2365,14 @@ class Run:
                 f"Discard indices should all be unique, but got {discard_indices}"
             )
 
+        if (
+            self._forced_selected_card_index is not None
+            and self._forced_selected_card_index not in discard_indices
+        ):
+            raise MissingForcedSelectedCardError(
+                f"Forced selected card index {self._forced_selected_card_index} not in discard indices {discard_indices}"
+            )
+
         self._discard(discard_indices)
 
         self._discards -= 1
